@@ -2,6 +2,7 @@
 // show databases
 
 // use ('jam')
+// db.people.find()
 
 // const arrpeople = [
 //     {
@@ -40,7 +41,27 @@
 
 
 
-// use ('jam')
-// db.people.find({ salary: {$gt: 1}})
+use ('jam')
+db.people.find()
+
 // db.people.find({ salary: { $gte: 1}}, {name: 1, lastname: 1} )
 
+
+// db.people.updateOne(
+//     {_id: ObjectId('6981f6fcb569151c9d9875ee')},
+//     {$set: {name: "Senhorita"}}
+// )
+
+// db.people.updateMany(
+//     {name: /s/},
+//     { $set: {salary: 3000}}
+// )
+
+// db.people.deleteOne({ 
+//     _id: ObjectId('6981f6fcb569151c9d9875ee')
+// })
+
+
+// db.people.deleteOne({ 
+//     _id: ObjectId('6981f6fcb569151c9d9875ee')
+// })
