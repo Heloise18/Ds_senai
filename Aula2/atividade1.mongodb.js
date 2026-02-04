@@ -42,7 +42,4 @@ const contatos = [
 db.contatos.insertMany(contatos);
 
 
-// db.people.updateOne(
-//     {_id: ObjectId('6981f6fcb569151c9d9875ee')},
-//     {$set: {name: "Senhorita"}}
-// )
+

@@ -10,5 +10,8 @@ use('atividade1')
 
 // db.contatos.find({dataCadastro: {$gt: new Date("2023-01-01")}})
 
-
+// db.contatos.updateOne(
+//     {nome: "Daniel Rocha"},
+//     {$set: {email: "daniel.rocha@bosch.com"} {telefone: "41977665544"}}
+// )
 
