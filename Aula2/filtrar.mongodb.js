@@ -15,3 +15,23 @@ use('atividade1')
 //     {$set: {email: "daniel.rocha@bosch.com"} {telefone: "41977665544"}}
 // )
 
+
+// db.contatos.updateOne(
+//     {nome: "Daniel Rocha"},
+//     {$set: {cidade: "Campo Largo"}}
+// )
+
+// db.contatos.updateMany(
+//      {telefone: /41/},
+//     { $set: {cidade: "curitiba"}}
+// )
+
+
+// db.contatos.deleteOne({ 
+//    email: "ana.silva@gmail.com"
+// })
+
+
+db.contatos.deleteOne({ 
+   cidade: "Curitiba"
+})
