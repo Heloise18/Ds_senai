@@ -12,4 +12,10 @@ router
 
     })
 
+
+    .get("/user", (req: Request, res: Response) => {
+
+        res.status(200).send({user: people})
+    })
+
 export default router;
