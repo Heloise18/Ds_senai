@@ -6,8 +6,8 @@ const people: object[] = [];
 
 router
     .post('/register', (req: Request , res: Response) => {
-        const { name, idade} = req.body
-        people.push({name, idade})
+        const {id, name, idade} = req.body
+        people.push({id, name, idade})
         res.status(200).send({ message: `Usuario ${name} cadastrado com sucesso`  })
 
     })
@@ -18,10 +18,28 @@ router
         res.status(200).send({user: people})
     })
 
-    .get("/user/:id", (req:Request, res:Response) => {
+    // .get("/user/:id", (req:Request, res:Response) => {
+    //     const { id } = req.params
+    //     let convertedID = Number(id)
+    //     res.status(200).send({response: people[convertedID]})
+
+    // })
+
+    .get("/filtro", (req:Request, res:Response) => {
+        const {id, name, idade } = req.query
+        res.status(200).send({response:id, name, idade})
+
+    })
+
+    .put("/atualizar/:id",  (req:Request, res:Response) => {
         const { id } = req.params
-        let convertedID = Number(id)
-        res.status(200).send({response: people[convertedID]})
+        const { name, idade } = req.query
+        res.status(200).send({response: `Atualizando usuario ${id} -> ${name} - ${idade}`})
+
+    })
+    .delete("/deletar/:id", (req:Request, res:Response) => {
+        const { id } = req.params
+        res.status(200).send({response: `Deletando usuario ${id}`})
 
     })
 
