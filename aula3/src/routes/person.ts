@@ -18,4 +18,11 @@ router
         res.status(200).send({user: people})
     })
 
+    .get("/user/:id", (req:Request, res:Response) => {
+        const { id } = req.params
+        let convertedID = Number(id)
+        res.status(200).send({response: people[convertedID]})
+
+    })
+
 export default router;
