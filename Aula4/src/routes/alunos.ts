@@ -67,18 +67,24 @@ router
     .put("/atualizar/:id",  (req:Request, res:Response) => {
         const { id } = req.params
         const {  nome, email, tipo, ativo } = req.body
-        const Exists = aluno.find((a) => a.email == email )
-        
-        if(Exists){
+        const alunoo = aluno.find((a) => a.email == email )
+        if(alunoo){
+            alunoo.nome = nome
+            alunoo.email = email
+            alunoo.tipo = tipo
+            alunoo.ativo = ativo
+            return res.status(200).send({response: `Atualizando usuario ${id} -> ${nome}`})
+        }else{
+            
             return res.status(500).send({ response: "Email já cadastrado!" });
         }
+        
 
 
 
-        return res.status(200).send({response: `Atualizando usuario ${id} -> ${nome}`})
     })       
 
-    
+
     .delete("/deletar/:id", (req:Request, res:Response) => {
         const { id } = req.params
         let convertedID = Number(id)
