@@ -135,7 +135,7 @@ router
         let convertedID = Number(id)
         const EXISTE = aluno.find((a) => a.id == convertedID )
         
-        if(!EXISTE){
+        if(!EXISTE){ 
             return res.status(404).send({ response: "Usuario não encontrado" });
         }
         
