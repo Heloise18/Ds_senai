@@ -140,6 +140,7 @@ router
         }
         
         aluno.splice(convertedID - 1 ,1);
+        console.log(aluno)
         return res.status(200).send({response: `Deletando usuario ${id}`});
 
     })
