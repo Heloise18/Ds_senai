@@ -1,4 +1,5 @@
 import express, { Request, Response, Router } from "express";
+import { request } from "node:http";
 
 const router: Router = express.Router();
 
@@ -43,17 +44,21 @@ router
         return res.status(200).send({message:  `Usuario ${nome} cadastrado com sucesso` });
     })
 
-    .get("/aluno", (req: Request, res: Response) => {
+    .get("/get", (req: Request, res: Response) => {
        return res.status(200).send({aluno: aluno});
     })
 
-    .get("/aluno/filtro/:tipo", (req: Request, res: Response) => {
+    .get("/get/filtro/:tipo", (req: Request, res: Response) => {
         const { tipo } = req.params;
         const people = aluno.filter((a) => a.tipo == tipo );
+        // const 
+        // if(tipo != ){
+        //     return res.status(404).send({response: "Tipo não encontrado"});
+        // }
         return res.status(200).send({response: people});
     })
 
-    .get("/aluno/:id", (req: Request, res: Response) => {
+    .get("/get/:id", (req: Request, res: Response) => {
         const { id } = req.params;
         let convertedID = Number(id)
         const AlunoExists = aluno.find((a) => a.id == convertedID);
@@ -67,23 +72,63 @@ router
     .put("/atualizar/:id",  (req:Request, res:Response) => {
         const { id } = req.params
         const {  nome, email, tipo, ativo } = req.body
-        const alunoo = aluno.find((a) => a.email == email )
-        if(alunoo){
-            alunoo.nome = nome
-            alunoo.email = email
-            alunoo.tipo = tipo
-            alunoo.ativo = ativo
-            return res.status(200).send({response: `Atualizando usuario ${id} -> ${nome}`})
-        }else{
-            
-            return res.status(500).send({ response: "Email já cadastrado!" });
-        }
+
+        let convertedID = Number(id)
+    
+        const alunoo = aluno.find((a) => a.id == convertedID)
+        const emaill = aluno.find((a) => email == a.email)
         
+        if(alunoo){
+            if(alunoo?.email == email){
+                return res.status(500).send({response: "Email não alterado!"})
+            }
 
+            if(!emaill){
+                alunoo.nome = nome
+                alunoo.email = email
+                alunoo.tipo = tipo
+                alunoo.ativo = ativo
+                return res.status(200).send({response: `Atualizando usuario ${id} -> ${nome}`})
+            }
 
+            return res.status(500).send({ response: "Email já cadastrado!" }); 
+        }
+        return res.status(404).send({ response: "Error usuario inexistente" }); 
 
     })       
+    
+    
+    .patch("/update/:id", (req:Request, res:Response) =>{
+        const { id } = req.params
+        const {  nome, email, tipo, ativo } = req.body
+        
+        let convertedID = Number(id)
+        
+        const alunoo = aluno.find((a) => a.id == convertedID )
+        if(alunoo){
+            
+            if(nome != null){
+                alunoo.nome = nome
+            }
 
+            if(email != null){
+                alunoo.email = email
+            }
+
+            if(tipo != null){
+                alunoo.tipo = tipo
+            }
+
+            if(ativo != null){
+                alunoo.ativo = ativo
+            }
+            return res.status(200).send({ response: "Usuario atualizado!" });
+            
+        }else{
+            return res.status(500).send({ response: "Usuario não encontrado" });
+
+        }
+    })
 
     .delete("/deletar/:id", (req:Request, res:Response) => {
         const { id } = req.params
@@ -93,8 +138,9 @@ router
         if(!EXISTE){
             return res.status(404).send({ response: "Usuario não encontrado" });
         }
-
-        return res.status(200).send({response: `Deletando usuario ${id}`})
+        
+        aluno.splice(convertedID - 1 ,1);
+        return res.status(200).send({response: `Deletando usuario ${id}`});
 
     })
 
