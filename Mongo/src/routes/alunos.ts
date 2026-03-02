@@ -1,22 +1,15 @@
 import express, { Request, Response, Router } from "express";
 import { request } from "node:http";
-import Person from '../models/Person.ts'
-
-
+import PersonController from '../controllers/personController.ts'
+import { validateRegister } from "../middlewares/personMiddleware.ts";
 const router: Router = express.Router();
 
-
-
-
 router 
-    .post("/register", async (req:Request, res:Response) =>{
-        const {name, lastname, age} = req.body
-        const person = new Person({name, lastname, age})
-        
-        await person.save()
-        res.status(200).send("Registrado com sucesso!")
-    })
 
+    .post("/post",validateRegister, PersonController.postUser)
+    .get("/get",PersonController.getUsers)
+    .put("/put/:id",PersonController.putUSer)
+    .delete("/delete/:id",PersonController.deleteUser)
 
 export default router;       
 
