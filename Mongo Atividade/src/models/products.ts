@@ -12,9 +12,11 @@ createdAt: Date;
 
 const productSchema: Schema = new Schema({
     name: { type: String, required: true },
-    lastname: {type: String, required: true},
-    age: { type: Number, required: true },
-    age: { type: Number, required: true },
+    description: {type: String},
+    price: { type: Number, required: true },
+    stock: { type: Number, default: 0 },
+    category: { type: String},
+    createdAt: { type: Number, default: Date.now },
 });
 
 const Product = mongoose.model<IProduct>('Product', productSchema, 'Product');
