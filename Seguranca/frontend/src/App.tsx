@@ -1,8 +1,39 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { Register } from './Pages/Register'
+import { Login } from './Pages/login'
 
 function App() {
+
+  const createProduct = async () => {
+    try {
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  return (
+    <>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/home' element={<Home></Home>}></Route>
+        <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/register' element={<Register></Register>}></Route>
+      </Routes>
+    </BrowserRouter>
+    
+    
+
+  
+      
+    </>
+  )
+}
+
+export default App
+
 
   // const [products, setProducts] = useState<any[]>([])
 
@@ -22,35 +53,6 @@ function App() {
 //     const response = await axios.get("http://localhost:8080/api/products/find")
 //     console.log(response.data)
 //     setProducts(response.data.users)
-
-  const createProduct = async () => {
-    try {
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  return (
-    <>
-    <div className='out'>
-      <div className='background'>
-        <h1>Cheese</h1>
-        <div className='buttao'>
-          <button>Cadastro</button>
-          <button>Login</button>
-        </div>
-      </div>
-    </div>
-
-
-  
-      
-    </>
-  )
-}
-
-export default App
-
 
 
 
