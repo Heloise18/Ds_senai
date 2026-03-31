@@ -4,21 +4,17 @@ import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { Register } from './Pages/Register'
 import { Login } from './Pages/login'
+import { RegisterProducts } from './Pages/RegisterProducts'
+import { Home } from './Pages/Home'
 
 function App() {
-
-  const createProduct = async () => {
-    try {
-    } catch (error) {
-      console.error(error)
-    }
-  }
 
   return (
     <>
     <BrowserRouter>
       <Routes>
         <Route path='/home' element={<Home></Home>}></Route>
+        <Route path='/create/product' element={<RegisterProducts></RegisterProducts>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
       </Routes>
@@ -53,12 +49,8 @@ export default App
 //     const response = await axios.get("http://localhost:8080/api/products/find")
 //     console.log(response.data)
 //     setProducts(response.data.users)
-
-
-
-
-
-  //     await axios.post("http://localhost:8080/api/products/create", {
+  //     
+  // await axios.post("http://localhost:8080/api/products/create", {
   //       name,
   //       description,
   //       category,

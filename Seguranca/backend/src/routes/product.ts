@@ -1,6 +1,6 @@
 import express , {Request, Response, Router } from 'express';
 import ProductController from '../controllers/ProductController';
-import { validateRegister, validateObejctId } from '../middlewares/personMiddleware';
+import { validateRegister, validateObejctId } from '../middlewares/Middleware';
 const router: Router = express.Router()
 
 router
