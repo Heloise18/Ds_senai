@@ -3,8 +3,6 @@ import axios from "axios"
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom"
 
-const navigate = useNavigate()
-
 export const RegisterProducts = () => {
     const[name, setName] = useState("")
     const[description, setDescription] = useState("")
@@ -12,7 +10,7 @@ export const RegisterProducts = () => {
     const[stock, setStock] = useState(0)
     const[category, setCategory] = useState("")
     // const[criatedAt, setCriatedAt] = useState() ??
-
+    const navigate = useNavigate()
     const handleProductRegister = async () => {
        try {
            await axios.post('http://localhost:8080/api/products/create', {name, description, price, stock, category})
