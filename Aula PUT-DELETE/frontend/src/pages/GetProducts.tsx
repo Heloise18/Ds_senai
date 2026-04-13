@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Swal from "sweetalert2";
 
 interface Product {
     _id: string
@@ -19,8 +20,27 @@ export const GetProducts = () => {
     }
 
     const deleteProduct = async (id: string) => {
-        await axios.delete(`http://localhost:8080/api/products/remove/${id}`)
-        fetchData()
+        Swal.fire({
+            title: "Você quer deletar o item?",
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Confirmar",
+            cancelButtonText: "Cancelar"
+            }).then( async (result) => {
+
+                if (result.isConfirmed) {
+                    try {
+                        await axios.delete(`http://localhost:8080/api/products/remove/${id}`)
+                        Swal.fire("Deletado com sucesso ", "", "success");
+                        fetchData()
+                        
+                    } catch (error) {
+                        Swal.fire("Error", "", "error");
+                        
+                    }
+                }
+            });
+
     }
 
     const updateProduct = async (id: string) => {
@@ -74,7 +94,10 @@ export const GetProducts = () => {
                                         })}
                                     </td>
                                     <td  className="px-6 py-4 font-medium " >
-                                        <button className="rounded-sm p-2 bg-red-600 text-white mx-5" onClick={() => deleteProduct(product._id)}> Deletar</button>
+                                        <button 
+                                        className="rounded-sm p-2 bg-red-600 text-white mx-5" 
+                                        onClick={() => deleteProduct(product._id)}> Deletar
+                                        </button>
                                         <button className="rounded-sm p-2 bg-blue-600 text-white mx-5" onClick={()=> updateProduct(product._id)}>Atualizar</button>
                                     </td>
                                 </tr>
